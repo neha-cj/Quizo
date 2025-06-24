@@ -52,13 +52,19 @@ body{
 
 .options{
     margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
 }
-.options div{
+.options button{
     padding: 10px 30px;
     border: 1px solid rgb(181, 124, 124);
     margin-top: 10px;
     border-radius: 6px;
-    
+    text-align: left;
+    background-color: #bbbcef;
+}
+.options button:hover{
+    background-color: #a986cd;
 }
 .bottom{
     padding: 10px 0px;
@@ -77,4 +83,22 @@ body{
 }
 .next-btn:hover{
     background-color: rgb(92, 38, 143);
+}
+
+.overlay{
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    
+
+}
+.overlay-body {
+  background-color: #fefefe;
+  margin: 15% auto; 
+  padding: 20px 20px;
+  border: 1px solid #888;
+  width: 80%;
 }

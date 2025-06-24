@@ -1,5 +1,5 @@
 const questiondiv =document.querySelector(".question p");
-const optionsdiv=document.querySelector(".options div")
+const optionsdiv=document.querySelector(".options")
 const timep=document.querySelector(".time-left");
 const nextBtn= document.querySelector(".next-btn");
 const progressDiv= document.querySelector(".progress")
@@ -15,7 +15,6 @@ fetch("questions.json")
   .then(data => {
     quizData = data;
     loadQuestion();
-    nextBtn.disabled = true;
   })
   .catch(error => console.error("Error loading quiz data:", error));
 
@@ -28,11 +27,16 @@ function loadQuestion(){
     timeleft = 15;
     timep.textContent = `${timeleft}s`;
     const q = quizData[currentQ];
-    console.log(q)
-    
+    optionsdiv.innerHTML ="";
+    q.options.forEach(option => {
+        const button = document.createElement("button");
+        button.textContent=option
+        optionsdiv.appendChild(button)
+
+    });
+    startTimer();
     questiondiv.textContent = `Q${currentQ + 1}. ${q.question}`;
     progressDiv.textContent = `${currentQ + 1} of ${quizData.length} questions`;
-    nextBtn.disabled = true;
     startTimer();
 }
 
@@ -41,21 +45,30 @@ function startTimer(){
     timer= setInterval(() =>{
         timeleft--;
         timep.textContent=`${timeleft}s`;
-
         if (timeleft<=0){
             clearInterval(timer);
             timep.textContent="Time's up!";
             userAns.push(null);
             currentQ++;
-            while (currentQ <= quizData.length){
+            if (currentQ < quizData.length){
                 loadQuestion();
             }
-            //showFinalResult(); 
+            showFinalResult(); 
         }
     },1000);
 }
 
-function showFinalResult(){
+nextBtn.addEventListener("click",() => {
+    currentQ++;
+    if(currentQ < quizData.length){
+        loadQuestion();
+    }  
+})
 
+function showFinalResult(){
+    document.querySelector(".overlay").style.display="block";
 }
 
+function closeOverlay(){
+    document.querySelector(".overlay").style.display="none";
+}
