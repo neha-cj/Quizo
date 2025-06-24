@@ -1,0 +1,32 @@
+[
+  {
+    "question": "How do you comment in CSS?",
+    "options": [
+      "// comment",
+      "<!-- comment -->",
+      "/* comment */",
+      "# comment"
+    ],
+    "correct": 2
+  },
+  {
+    "question": "What does HTML stand for?",
+    "options": [
+      "Hyper Text Markup Language",
+      "Home Tool Markup Language",
+      "Hyperlinks Text Markup Language",
+      "None of these"
+    ],
+    "correct": 0
+  },
+  {
+    "question": "Which property is used to change text color in CSS?",
+    "options": [
+      "font-color",
+      "text-style",
+      "text-color",
+      "color"
+    ],
+    "correct": 3
+  }
+]

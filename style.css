@@ -41,9 +41,13 @@ body{
     display: flex;
     justify-content: space-between;
 }
-.top i{
-    padding: 10px 10px;
-    margin-top: 15px;
+.top div{
+    display: flex;
+    gap: 5px;
+    margin-top: 10px;
+}
+.top div i{
+    margin-top: 17px;
 }
 
 .options{
