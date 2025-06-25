@@ -9,6 +9,7 @@ let score=0
 let userAns=[];
 let timer;
 let timeleft=15;
+let selectedOp=null;
 
 fetch("questions.json")
   .then(response => response.json())
@@ -23,20 +24,30 @@ function startQuiz() {
 }
 
 function loadQuestion(){
-    //clearInterval(timer);
+    clearInterval(timer);
     timeleft = 15;
     timep.textContent = `${timeleft}s`;
+    selectedOp=null;
     const q = quizData[currentQ];
     optionsdiv.innerHTML ="";
+    questiondiv.textContent = `Q${currentQ + 1}. ${q.question}`;
+    progressDiv.textContent = `${currentQ + 1} of ${quizData.length} questions`;
+
+
     q.options.forEach(option => {
         const button = document.createElement("button");
         button.textContent=option
-        optionsdiv.appendChild(button)
+        button.classList.add("option-button");
 
+        button.addEventListener("click",() =>{
+            selectedOp=option;
+              document.querySelectorAll(".option-button").forEach(btn => {
+                btn.classList.remove("selected");
+            });
+            button.classList.add("selected");   
+        })
+        optionsdiv.appendChild(button)
     });
-    startTimer();
-    questiondiv.textContent = `Q${currentQ + 1}. ${q.question}`;
-    progressDiv.textContent = `${currentQ + 1} of ${quizData.length} questions`;
     startTimer();
 }
 
@@ -48,25 +59,38 @@ function startTimer(){
         if (timeleft<=0){
             clearInterval(timer);
             timep.textContent="Time's up!";
-            userAns.push(null);
+            //userAns.push(null);
             currentQ++;
-            if (currentQ < quizData.length){
+            if (currentQ < quizData.length) {
                 loadQuestion();
+            } else {
+                showFinalResult();
             }
-            showFinalResult(); 
         }
     },1000);
 }
 
 nextBtn.addEventListener("click",() => {
+    if (selectedOp!==null){
+        userAns.push(selectedOp)
+    }
+    else{
+        userAns.push(null);
+    }
     currentQ++;
     if(currentQ < quizData.length){
         loadQuestion();
     }  
+    else{
+        showFinalResult();
+    }
 })
 
 function showFinalResult(){
+    console.log(userAns)
     document.querySelector(".overlay").style.display="block";
+    document.querySelector(".overlay-body p").textContent =
+        `You attempted ${userAns.filter(ans => ans !== null).length} out of ${quizData.length} questions.`;
 }
 
 function closeOverlay(){
