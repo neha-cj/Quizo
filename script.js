@@ -7,7 +7,7 @@ const reviewCard=document.querySelector(".review-section");
 
 let currentQ=0
 let score=0
-let userAns=[];
+let len;
 let timer;
 let timeleft=15;
 let selectedOp=null;
@@ -16,10 +16,13 @@ fetch("questions.json")
   .then(response => response.json())
   .then(data => {
     quizData = data;
+    len= quizData.length;
     loadQuestion();
   })
   .catch(error => console.error("Error loading quiz data:", error));
 
+
+let userAns=new Array(len).fill(null);
 function startQuiz() {
     window.location.href = "quizo.html";
 }
@@ -38,12 +41,12 @@ function loadQuestion(){
     q.options.forEach(option => {
         const button = document.createElement("button");
         button.textContent=option;
-        button.classList.add("option-button", "px-2", "py-4", "mt-2", "rounded-md","text-left", "bg-[#bbbcef]", "border", "border-[#b57c7c]");
+        button.classList.add("option-button", "px-2", "py-3","ml-2","mr-2", "mt-2", "rounded-md","text-left", "bg-[#bbbcef]", "border", "border-[#b57c7c]");
         button.addEventListener("click",() =>{
             selectedOp=option;
             document.querySelectorAll(".option-button").forEach(btn => {
                 btn.classList.remove("px-2", "py-4", "mt-2", "text-left", "rounded-md", "bg-green-300" ,"border" ,"border-green-500");
-                btn.classList.add("px-2", "py-4", "mt-2", "text-left", "rounded-md","bg-[#bbbcef]", "border-[#b57c7c]", "text-black");
+                btn.classList.add("px-2", "py-4", "mt-2", "text-left", "rounded-md","bg-[#bbbcef]","border","border-[#b57c7c]", "text-black");
 
             });
             button.classList.remove("px-2", "py-4", "mt-2", "text-left", "rounded-md","bg-[#bbbcef]", "border-[#b57c7c]", "text-black");
@@ -62,10 +65,12 @@ function startTimer(){
         if (timeleft<=0){
             clearInterval(timer);
             timep.textContent="Time's up!";
-            //userAns.push(null);
             currentQ++;
             if (currentQ < quizData.length) {
                 loadQuestion();
+            }
+            if(currentQ==quizData.length){
+                showFinalResult();
             }
         }
     },1000);
