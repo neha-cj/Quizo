@@ -7,4 +7,4 @@ A dynamic quiz web application built with HTML, CSS, and JavaScript.
 - The user can select their answer and then click next button to move to the next question. 
 - There is a countdown timer for each question, and if the time runs out, the quiz will automatically move to the next one.
 - At the end of the quiz, the user can see a summary of their performance, including how many questions they got right and a review of their answers. 
-- The final result is shown in a pop-up or overlay window.
+- The final result is shown in an overlay window.
