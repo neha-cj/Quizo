@@ -37,15 +37,17 @@ function loadQuestion(){
 
     q.options.forEach(option => {
         const button = document.createElement("button");
-        button.textContent=option
-        button.classList.add("option-button");
-
+        button.textContent=option;
+        button.classList.add("option-button", "px-2", "py-4", "mt-2", "rounded-md","text-left", "bg-[#bbbcef]", "border", "border-[#b57c7c]");
         button.addEventListener("click",() =>{
             selectedOp=option;
             document.querySelectorAll(".option-button").forEach(btn => {
-                btn.classList.remove("selected");
+                btn.classList.remove("px-2", "py-4", "mt-2", "text-left", "rounded-md", "bg-green-300" ,"border" ,"border-green-500");
+                btn.classList.add("px-2", "py-4", "mt-2", "text-left", "rounded-md","bg-[#bbbcef]", "border-[#b57c7c]", "text-black");
+
             });
-            button.classList.add("selected");   
+            button.classList.remove("px-2", "py-4", "mt-2", "text-left", "rounded-md","bg-[#bbbcef]", "border-[#b57c7c]", "text-black");
+            button.classList.add("px-2", "py-4", "mt-2","rounded-md","text-left","bg-green-300","border", "border-green-500");
         })
         optionsdiv.appendChild(button)
     });
@@ -92,27 +94,38 @@ nextBtn.addEventListener("click",() => {
 function showFinalResult(){
    
     console.log(userAns)
-    document.querySelector(".overlay").style.display="block";
+    document.querySelector(".overlay").classList.remove("hidden");
     document.querySelector(".overlay-body p").textContent =
         `You attempted ${userAns.filter(ans => ans !== null).length} out of ${quizData.length} questions.`;
     document.getElementById("score").textContent=
-        `you scored: ${score} out of ${quizData.length}`;
+        `You scored: ${score} out of ${quizData.length}`;
     
     quizData.forEach((q,index)=>{
         const userAnswer = userAns[index];
         const isCorrect = userAnswer === q.correct;
 
-        const p = document.createElement("p");
-        p.innerHTML = `
-            <strong>Q${index + 1}.</strong> ${q.question}<br>
-            <strong>Options:</strong> <br>${q.options.join("<br>")}<br><br>
-            <strong>Correct Answer:</strong> ${q.correct}<br>
-            <strong>Your Answer:</strong> ${userAnswer === null ? "Not Answered" : userAnswer}
-            <br><span style="color:${isCorrect ? 'green' : 'red'};">${isCorrect ? " Correct" : " Incorrect"}</span><br><br>`;
-        reviewCard.appendChild(p);
+        const reviewblock = document.createElement("div");
+        reviewblock.className = "p-4 mb-4 rounded-lg bg-gray-100";
+        reviewblock.innerHTML = `
+            <h3 class="text-lg text-purple-800">Q${index + 1}. ${q.question}</h3>
+            <div class="text-sm text-gray-700 mt-2">
+                <p><strong>Options:</strong></p>
+                <ul>${q.options.map(opt => `<li>${opt}</li>`).join("")}</ul>
+                <p class="mt-2"><strong>Correct Answer:</strong> <span class="text-green-700">${q.correct}</span></p>
+                <p><strong>Your Answer:</strong> 
+                    <span>${userAnswer === null ? "Not Answered" : userAnswer}</span>
+                </p>
+                <p class="mt-1 font-semibold ${isCorrect ? 'text-green-700': 'text-red-600'}">
+                    ${isCorrect ? "Correct" : "Incorrect"}
+                </p>
+            </div>
+        `;
+        reviewCard.appendChild(reviewblock);
     })
 }
 
-function closeOverlay(){
-    document.querySelector(".overlay").style.display="none";
-} 
+function closeOverlay() {
+  document.querySelector(".overlay").classList.add("hidden");
+  document.querySelector(".quiz-section").classList.add("hidden");
+  document.querySelector(".ResultPage").classList.remove("hidden");
+}
