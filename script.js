@@ -129,3 +129,7 @@ function closeOverlay() {
   document.querySelector(".quiz-section").classList.add("hidden");
   document.querySelector(".ResultPage").classList.remove("hidden");
 }
+
+function goBackHome(){
+    window.location.href = "index.html";
+}
