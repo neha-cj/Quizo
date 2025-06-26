@@ -37,7 +37,6 @@ function loadQuestion(){
     questiondiv.textContent = `Q${currentQ + 1}. ${q.question}`;
     progressDiv.textContent = `${currentQ + 1} of ${quizData.length} questions`;
 
-
     q.options.forEach(option => {
         const button = document.createElement("button");
         button.textContent=option;
@@ -82,10 +81,10 @@ nextBtn.addEventListener("click",() => {
         if (selectedOp==q.correct){
             score++;
         }
-        userAns.push(selectedOp)      
+        userAns[currentQ]=selectedOp;    
     }
     else{
-        userAns.push(null);
+        userAns[currentQ]= null;
     }
     currentQ++;
     if(currentQ < quizData.length){
@@ -97,7 +96,6 @@ nextBtn.addEventListener("click",() => {
 })
 
 function showFinalResult(){
-   
     console.log(userAns)
     document.querySelector(".overlay").classList.remove("hidden");
     document.querySelector(".overlay-body p").textContent =

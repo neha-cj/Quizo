@@ -1,32 +1,57 @@
 [
   {
-    "question": "How do you comment in CSS?",
-    "options": [
-      "// comment",
-      "/**comment /",
-      "/* comment */",
-      "# comment"
-    ],
-    "correct": "/* comment */"
+    "question": "What does the 'this' keyword refer to in a regular function?",
+    "options": ["The global object", "The parent function", "The object calling the function", "undefined"],
+    "correct": "The object calling the function"
   },
   {
-    "question": "What does HTML stand for?",
-    "options": [
-      "Hyper Text Markup Language",
-      "Home Tool Markup Language",
-      "Hyperlinks Text Markup Language",
-      "None of these"
-    ],
-    "correct": "Hyper Text Markup Language"
+    "question": "Which of these is NOT a JavaScript data type?",
+    "options": ["Number", "Boolean", "Character", "Undefined"],
+    "correct": "Character"
   },
   {
-    "question": "Which property is used to change text color in CSS?",
+    "question": "What is the output of: typeof NaN?",
+    "options": ["'NaN'", "'undefined'", "'number'", "'object'"],
+    "correct": "'number'"
+  },
+  {
+    "question": "How can you create an object in JavaScript?",
+    "options": ["let obj = {}", "let obj = new Object()", "Both A and B", "None of the above"],
+    "correct": "Both A and B"
+  },
+  {
+    "question": "Which method converts a JSON string into a JavaScript object?",
+    "options": ["JSON.parse()", "JSON.stringify()", "JSON.convert()", "JSON.objectify()"],
+    "correct": "JSON.parse()"
+  },
+  {
+    "question": "What does '===' operator check in JavaScript?",
+    "options": ["Only value", "Only type", "Both value and type", "None of the above"],
+    "correct": "Both value and type"
+  },
+  {
+    "question": "What is the purpose of promises in JavaScript?",
+    "options": ["To handle errors", "To write synchronous code", "To handle asynchronous operations", "To create variables"],
+    "correct": "To handle asynchronous operations"
+  },
+  {
+    "question": "Which keyword is used to declare a constant variable in JavaScript?",
+    "options": ["let", "var", "const", "define"],
+    "correct": "const"
+  },
+  {
+    "question": "What will `Array.isArray([])` return?",
+    "options": ["true", "false", "undefined", "TypeError"],
+    "correct": "true"
+  },
+  {
+    "question": "What is a closure in JavaScript?",
     "options": [
-      "font-color",
-      "text-style",
-      "text-color",
-      "color"
+      "A function inside another function that has access to the outer function's variables",
+      "A way to close unused variables",
+      "A loop that stops execution",
+      "An error-handling technique"
     ],
-    "correct": "color"
+    "correct": "A function inside another function that has access to the outer function's variables"
   }
 ]
